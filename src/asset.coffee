@@ -8,6 +8,7 @@
 
 EventEmitter = require './core/events'
 HTTPSource   = require './sources/node/http'
+HTTPLimitedSource   = require './sources/node/httpLimited'
 FileSource   = require './sources/node/file'
 BufferSource = require './sources/buffer'
 Demuxer      = require './demuxer'
@@ -33,6 +34,9 @@ class Asset extends EventEmitter
             
     @fromURL: (url) ->
         return new Asset new HTTPSource(url)
+
+    @fromLimitedURL: (url, limit) ->
+        return new Asset new HTTPLimitedSource(url, limit)
 
     @fromFile: (file) ->
         return new Asset new FileSource(file)
